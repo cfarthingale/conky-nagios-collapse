@@ -10,7 +10,7 @@ HOSTS=(Server1 Server2 Server3 Server4)
 for hostyness in ${HOSTS[@]}; do
         PINGSTATUS[$hostyness]="$(/usr/local/nagios/libexec/check_ping -H $hostyness -w 1000.0,80% -c 3000.0,100% -p 1|cut -d' ' -f2-10)" ;
         LOADSTATUS[$hostyness]="$(/usr/local/nagios/libexec/check_nrpe -H $hostyness -c check_load|cut -d' ' -f 1-2,7-9|cut -d'|' -f1)" ;
-        SSHSTATUS[$hostyness]="$(/usr/local/nagios/libexec/check_ssh -H $hostyness -p 32022 -t 1)" ;
+        SSHSTATUS[$hostyness]="$(/usr/local/nagios/libexec/check_ssh -H $hostyness -t 1)" ;
         USERSTATUS[$hostyness]="$(/usr/local/nagios/libexec/check_nrpe -H $hostyness -c check_users|cut -d' ' -f2-5)" ;
         DISKSTATUS[$hostyness]="$(/usr/local/nagios/libexec/check_nrpe -H $hostyness -c check_disk|cut -d' ' -f2-3,7-8)" ;
 done
