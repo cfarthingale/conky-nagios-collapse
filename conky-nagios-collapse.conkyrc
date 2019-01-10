@@ -46,6 +46,6 @@ conky.config = {
 conky.text = [[
 + Service Monitor - ${time %d %b %Y %H:%M:%S}
 +
-+ ${execbar ssh -l nagios XenServer 'df -kh|grep mapper'|awk '{print $5}'|cut -c1-2} - m700-xen0
++ ${execbar ssh -l nagios XenServer 'df -kh|grep mapper'|awk '{print $5}'|cut -c1-2} - XenServer
 ${execp ssh -l nagios XenServer 'bash /root/scripts/nagios-collapse-beta.sh'}
 ]]
