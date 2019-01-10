@@ -1,0 +1,14 @@
+#!/bin/bash
+function check-ping-fast () {
+	hostname=$1
+	nc=$(nmap -sn --max-retries=1 --host-timeout=500ms -n $hostname|grep Host|awk '{print $3}')
+	if [ "$nc" = "up" ]; then echo "OK"; else echo "CRITICAL - PING TIMEOUT"; fi
+}
+
+function check-ssh-fast () {
+	hostname=$1
+	port=$2
+	sc=$(nmap --max-retries=1 --host-timeout=1500ms -n -p $port $hostname|grep "$port"|cut -d' ' -f2)
+	if [ "$sc" = "open" ]; then echo "OK"; else echo "CRITICAL - SSH TIMEOUT"; fi
+}
+$1 $2 $3
